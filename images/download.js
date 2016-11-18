@@ -13,7 +13,7 @@ var json = require('../data/data.json');
  */
 var download = function (az, username, password) {
   httpntlm.get({
-    url: 'http://srvwebaak01/TLFimageupload/imageHandler.ashx?ident=' + az,
+    url: 'http://10.215.17.47/TLFimageupload/imageHandler.ashx?ident=' + az,
     username: username,
     password: password,
     workstation: '',

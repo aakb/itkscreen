@@ -16,19 +16,20 @@ var download = function (id, username, password) {
   var deferred = Q.defer();
 
   httpntlm.get({
-    url: 'http://telefonbog/webservice/ws_nypersondatabase/TLFgetpersonerbyhierarkiid_date_orgid/?orgid=' + id + '&format=json',
+    url: 'http://10.215.17.47/webservice/ws_nypersondatabase/TLFgetpersonerbyhierarkiid_date_orgid/?orgid=' + id + '&format=json',
     username: username,
     password: password,
     workstation: '',
     domain: ''
   }, function (err, response){
-    if(err) {
+    if (err) {
       deferred.reject(err);
     }
-
-    var json = JSON.parse(response.body);
-    json.id = id;
-    deferred.resolve(json);
+    else {
+      var json = JSON.parse(response.body);
+      json.id = id;
+      deferred.resolve(json);
+    }
   });
 
   return deferred.promise;
@@ -80,7 +81,7 @@ prompt.get(['username', { name: 'password', hidden: true }], function (err, resu
     download(1395, result.username, result.password)  // Design
   ]).then(
     function (data) {
-      console.log(require('util').inspect(data, true, 1));
+      //console.log(require('util').inspect(data, true, 1));
       for (var i in data) {
         for (var j in output) {
           if (data[i].id === output[j].id) {
